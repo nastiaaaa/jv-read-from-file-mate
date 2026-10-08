@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -26,8 +24,8 @@ public class FileWork {
     }
 
     private void getContent(String fileName) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String allContent = reader.readAllAsString();
+        try {
+            String allContent = java.nio.file.Files.readString(java.nio.file.Path.of(fileName));
             content = allContent.split("\\W+");
         } catch (IOException e) {
             throw new RuntimeException(e);
